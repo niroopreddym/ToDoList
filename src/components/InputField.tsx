@@ -13,7 +13,6 @@ interface Props {
 const InputField: React.FC<Props> = ({ todo, setTodo, handleAdd, inputRef}: Props) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
-   
   };
 
   console.log(todo);

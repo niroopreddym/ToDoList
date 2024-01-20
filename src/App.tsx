@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import "./App.css";
 import InputField from "./components/InputField";
 import { Todo } from "./components/model";
+import ToDoList from "./components/ToDoList";
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string | number>("");
   const [todos, setTodos] = useState<Todo[]>([]);
-
   
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,13 +24,8 @@ const App: React.FC = () => {
     <div className="App">
       <span className="heading">Taskify</span>
       <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} inputRef={inputRef}></InputField>
-      <ul>
-      {
-        todos.map((x: Todo) => (
-          <li>{x.todo}</li>
-        ))
-      }
-      </ul>
+      <ToDoList todos={todos} setTodos={setTodos}></ToDoList>
+      
     </div>
   );
 }
