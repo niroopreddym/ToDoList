@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Todo } from "./model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
-import InputField from "./InputField";
+import "./styles.css";
 
 type Props = {
   todo: Todo;
@@ -23,29 +23,45 @@ const SingleCard: React.FC<Props> = ({ todo, key, todos, setTodos }: Props) => {
     setTodos(todos.filter((x) => x.id !== id));
   };
 
-  const handleEdit = (id: number) => {
+  const handleEditMode = () => {
     if (!editMode && !todo.isDone) {
-      setEditMode(!editMode);
-    }
+        setEditMode(!editMode);
+      }
   };
+
+  const handleEdit = (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+    setTodos(todos.map((x) => (x.id === id ? { ...x, todo: editTodo } : x)));
+    setEditMode(false)
+  };
+
+  const inputRef = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [editMode])
+
   return (
-    <form className="todos__Single">
-      {/* edit ? (<input type="text" placeholder="update the value" value={editTodo}/>): */}
-      {todo.isDone ? (
+    <form className="todos__single"  onSubmit={(e) => handleEdit(e, todo.id)} >
+     {
+     editMode ? <input ref={inputRef} placeholder="update ur value" value={editTodo} onChange={(e:ChangeEvent<HTMLInputElement>) => setEditTodo(e.target.value)}className="todos__single__text"></input> : 
+     todo.isDone ? (
         <s className="todos__single__text">{todo.todo}</s>
       ) : (
         <span className="todos__single__text">{todo.todo}</span>
       )}
+     
 
       {/* <span className='todos__single__text'>{todo.todo}</span> */}
       <div>
         <span
           className="icon"
-          onClick={() => {
-            handleEdit(todo.id);
-          }}
+          onClick={() =>  
+            {
+                handleEditMode()
+            }
+          } 
         >
-          <AiFillEdit />\
+          <AiFillEdit />
         </span>
         <span
           className="icon"
@@ -53,7 +69,7 @@ const SingleCard: React.FC<Props> = ({ todo, key, todos, setTodos }: Props) => {
             handleDel(todo.id);
           }}
         >
-          <AiFillDelete />\
+          <AiFillDelete />
         </span>
         <span
           className="icon"
@@ -61,7 +77,7 @@ const SingleCard: React.FC<Props> = ({ todo, key, todos, setTodos }: Props) => {
             handleDone(todo.id);
           }}
         >
-          <MdDone />\
+          <MdDone />
         </span>
       </div>
     </form>

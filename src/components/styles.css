@@ -46,16 +46,16 @@
     flex-wrap: wrap;
 }
 
-.todos_single {
+.todos__single {
     display: flex;
-    width: 29.5%;
+    width: 100%;
     border-radius: 5px;
     padding: 20px;
     margin-top: 15px;
     background-image: url("https://img.freepik.com/free-photo/free-photo/crumpled-yello-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg");
 }
 
-.todos_single__text {
+.todos__single__text {
     flex: 1;
     padding: 5px;
     border: none;

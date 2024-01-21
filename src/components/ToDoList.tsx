@@ -1,6 +1,7 @@
 import React from "react";
 import { Todo } from "./model";
 import SingleCard from "./singlecard";
+import "./styles.css";
 
 interface Props {
   todos: Todo[];

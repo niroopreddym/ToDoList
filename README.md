@@ -47,4 +47,5 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## History
 
-    1. Basics states and Props and creating Components maintaining state
+    1. Basics states and Props and creating Components maintaining state.
+    2. Added functionality for edit, delete and finish actions for each todo.
